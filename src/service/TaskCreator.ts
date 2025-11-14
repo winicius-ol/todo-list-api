@@ -5,6 +5,6 @@ export default class TaskCreator {
   constructor(private params: TaskCreatorDTO) {}
 
   execute() {
-    return new Task(this.params.title, this.params.description, this.params.status, this.params.dueDate)
+    return new Task(this.params.title, this.params.description, this.params.status, this.params.dueDate, undefined)
   }
 }

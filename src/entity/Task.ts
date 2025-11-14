@@ -14,10 +14,15 @@ export default class Task {
     private title: string,
     private description: string,
     status: TaskStatus = TaskStatus.Pending,
-    dueDate?: string
+    dueDate?: string,
+    private id?: number
   ) {
     this.dueDate = this.handleDueDate(dueDate);
     this.status = this.handleStatus(status);
+  }
+
+  getId() {
+    return this.id
   }
 
   getTitle() {
