@@ -1,15 +1,19 @@
+export enum TaskStatus {
+  Pending = "Pending",
+  Ongoing = "Ongoing",
+  Completed = "Completed"
+}
+
 interface TaskProps {
   title: string;
   description: string;
-  status: string;
+  status?: TaskStatus;
 }
 
-class Task implements TaskProps {
+export default class Task implements TaskProps {
   constructor(
     public title: string,
     public description: string,
-    public status: string
+    public status: TaskStatus = TaskStatus.Pending
   ) {}
 }
-
-export default Task

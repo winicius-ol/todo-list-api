@@ -1,12 +1,25 @@
 import { describe, expect, test } from "@jest/globals";
-import Task from "@/entity/Task";
+import Task, { TaskStatus } from "@/entity/Task";
 
-describe('Task#constructor', () => {
-  test('should create a task with the provided properties', () => {
+describe('#constructor', () => {
+  test('Creates a task with the provided properties and default status', () => {
+    const params = {
+      title: 'Test',
+      description: 'Test description'
+    }
+
+    const task = new Task(params.title, params.description)
+
+    expect(task.title).toBe(params.title)
+    expect(task.description).toBe(params.description)
+    expect(task.status).toBe(TaskStatus.Pending)
+  })
+
+  test('Creates a task with the provided properties, including status', () => {
     const params = {
       title: 'Test',
       description: 'Test description',
-      status: 'Completed',
+      status: TaskStatus.Ongoing
     }
 
     const task = new Task(params.title, params.description, params.status)
