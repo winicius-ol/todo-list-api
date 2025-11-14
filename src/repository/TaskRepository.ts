@@ -1,4 +1,4 @@
-import Task from "@/entity/Task";
+import Task, { TaskStatus } from "@/entity/Task";
 import { DBAccessor } from "../db/DBAccessor";
 
 
@@ -13,7 +13,7 @@ export class TaskRepository {
   }
 
   static async getAll(dbAccessor: DBAccessor): Promise<Task[] | undefined> {
-    const result = await dbAccessor.executeQuery('SELECT * FROM tasks');
+    const result = await dbAccessor.executeQuery('SELECT * FROM tasks');    
     return (result.rows || []).map((row) => new Task(row.title, row.description, row.status, row.due_date, row.id));
   }
 }

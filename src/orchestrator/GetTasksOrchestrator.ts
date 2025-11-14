@@ -5,6 +5,6 @@ export default class GetTasksOrchestrator {
   constructor(private dbAccessor: DBAccessor) {}
 
   async execute() {
-    return TaskRepository.getAll(this.dbAccessor);
+    return await TaskRepository.getAll(this.dbAccessor);
   }
 }
