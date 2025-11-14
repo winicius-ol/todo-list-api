@@ -5,12 +5,18 @@ export enum TaskStatus {
 }
 
 export default class Task {
+  private status: TaskStatus
+  private dueDate?: Date | undefined
+
   constructor(
     private title: string,
     private description: string,
-    private status: TaskStatus = TaskStatus.Pending,
-    private dueDate?: string
-  ) {}
+    status: TaskStatus = TaskStatus.Pending,
+    dueDate?: string
+  ) {
+    this.dueDate = this.handleDueDate(dueDate);
+    this.status = status;
+  }
 
   getTitle() {
     return this.title
@@ -25,6 +31,23 @@ export default class Task {
   }
 
   getDueDate() {
-    return this.dueDate;
+    if (!this.dueDate) return;
+    return this.dueDate.toISOString().split("T")[0];
+  }
+
+  private handleDueDate(dueDate?: string): Date | undefined {
+    if (!dueDate) return;
+    if (this.isInvalidDate(dueDate)) {
+      throw new Error("Invalid date format");
+    }
+
+    const [year, month, day] = dueDate.split("-");
+    return new Date(Number(year), Number(month) - 1, Number(day));
+  }
+
+  private isInvalidDate(date?: string): boolean {
+    if (!date) return false;
+
+    return !date.match(/^\d{4}-\d{2}-\d{2}$/);
   }
 }

@@ -10,9 +10,9 @@ describe('#constructor', () => {
 
     const task = new Task(params.title, params.description)
 
-    expect(task.getTitle()).toBe(params.title)
-    expect(task.getDescription()).toBe(params.description)
-    expect(task.getStatus()).toBe(TaskStatus.Pending)
+    expect(task.getTitle()).toEqual(params.title)
+    expect(task.getDescription()).toEqual(params.description)
+    expect(task.getStatus()).toEqual(TaskStatus.Pending)
     expect(task.getDueDate()).toBeUndefined()
   })
 
@@ -26,9 +26,20 @@ describe('#constructor', () => {
 
     const task = new Task(params.title, params.description, params.status, params.dueDate)
 
-    expect(task.getTitle()).toBe(params.title)
-    expect(task.getDescription()).toBe(params.description)
-    expect(task.getStatus()).toBe(params.status)
-    expect(task.getDueDate()).toBe(params.dueDate)
+    expect(task.getTitle()).toEqual(params.title)
+    expect(task.getDescription()).toEqual(params.description)
+    expect(task.getStatus()).toEqual(params.status)    
+    expect(task.getDueDate()).toEqual(new Date(2025, 0, 30))
+  })
+
+  test('Does not create a task with invalid date', () => {
+    const params = {
+      title: 'Test',
+      description: 'Test description',
+      status: TaskStatus.Pending,
+      dueDate: "Invalid date"
+    }
+
+    expect(() => new Task(params.title, params.description, params.status, params.dueDate)).toThrow("Invalid date format")
   })
 })
