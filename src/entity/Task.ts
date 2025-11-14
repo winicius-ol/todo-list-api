@@ -4,16 +4,27 @@ export enum TaskStatus {
   Completed = "Completed"
 }
 
-interface TaskProps {
-  title: string;
-  description: string;
-  status?: TaskStatus;
-}
-
-export default class Task implements TaskProps {
+export default class Task {
   constructor(
-    public title: string,
-    public description: string,
-    public status: TaskStatus = TaskStatus.Pending
+    private title: string,
+    private description: string,
+    private status: TaskStatus = TaskStatus.Pending,
+    private dueDate?: string
   ) {}
+
+  getTitle() {
+    return this.title
+  }
+
+  getDescription() {
+    return this.description
+  }
+
+  getStatus() {
+    return this.status
+  }
+
+  getDueDate() {
+    return this.dueDate;
+  }
 }

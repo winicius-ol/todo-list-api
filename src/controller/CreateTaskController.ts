@@ -11,7 +11,12 @@ export default class CreateTaskController{
   }
 
   async execute(req: Request, res: Response) {
-    const taskParams: TaskCreatorDTO = req.body;
+    const taskParams: TaskCreatorDTO = {
+      title: req.body.title,
+      description: req.body.description,
+      status: req.body.status,
+      dueDate: req.body.due_date
+    }
 
     try {
       await this.db.initialize();

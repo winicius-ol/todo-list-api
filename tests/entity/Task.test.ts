@@ -10,22 +10,25 @@ describe('#constructor', () => {
 
     const task = new Task(params.title, params.description)
 
-    expect(task.title).toBe(params.title)
-    expect(task.description).toBe(params.description)
-    expect(task.status).toBe(TaskStatus.Pending)
+    expect(task.getTitle()).toBe(params.title)
+    expect(task.getDescription()).toBe(params.description)
+    expect(task.getStatus()).toBe(TaskStatus.Pending)
+    expect(task.getDueDate()).toBeUndefined()
   })
 
-  test('Creates a task with the provided properties, including status', () => {
+  test('Creates a task with the provided properties, including status and due date', () => {
     const params = {
       title: 'Test',
       description: 'Test description',
-      status: TaskStatus.Ongoing
+      status: TaskStatus.Ongoing,
+      dueDate: "2025-01-30"
     }
 
-    const task = new Task(params.title, params.description, params.status)
+    const task = new Task(params.title, params.description, params.status, params.dueDate)
 
-    expect(task.title).toBe(params.title)
-    expect(task.description).toBe(params.description)
-    expect(task.status).toBe(params.status)
+    expect(task.getTitle()).toBe(params.title)
+    expect(task.getDescription()).toBe(params.description)
+    expect(task.getStatus()).toBe(params.status)
+    expect(task.getDueDate()).toBe(new Date(params.dueDate))
   })
 })

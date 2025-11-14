@@ -10,16 +10,18 @@ async function exampleUsage() {
 
     const dbAccessor = db.getAccessor();
 
+    // Query all tasks
+    const selectResult = await dbAccessor.executeQuery('SELECT * FROM tasks');
+    console.log('All tasks:', selectResult.rows);
+
+    return
+
     // Insert a new task
     const insertResult = await dbAccessor.executeQuery(
       'INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)',
       ['Complete project setup', 'Set up database and basic structure', 'pending']
     );
     console.log('Inserted task with ID:', insertResult.lastID);
-
-    // Query all tasks
-    const selectResult = await dbAccessor.executeQuery('SELECT * FROM tasks');
-    console.log('All tasks:', selectResult.rows);
 
     // Update a task
     const updateResult = await dbAccessor.executeQuery(
