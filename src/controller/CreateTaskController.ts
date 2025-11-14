@@ -25,7 +25,6 @@ export default class CreateTaskController{
       console.error('Database error:', error);
     } finally {
       await this.db.close();
-      console.log('Database connection closed');
     }
   }
 }
