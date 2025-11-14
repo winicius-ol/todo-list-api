@@ -29,6 +29,6 @@ describe('#constructor', () => {
     expect(task.getTitle()).toBe(params.title)
     expect(task.getDescription()).toBe(params.description)
     expect(task.getStatus()).toBe(params.status)
-    expect(task.getDueDate()).toBe(new Date(params.dueDate))
+    expect(task.getDueDate()).toBe(params.dueDate)
   })
 })
