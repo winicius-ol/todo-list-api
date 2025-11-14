@@ -1,5 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import Task, { TaskStatus } from "@/entity/Task";
+import BadRequestError from "@/error/BadRequestError";
 
 describe('#constructor', () => {
   test('Creates a task with the provided properties and default status', () => {
@@ -40,7 +41,8 @@ describe('#constructor', () => {
       dueDate: "Invalid date"
     }
 
-    expect(() => new Task(params.title, params.description, params.status, params.dueDate)).toThrow("Invalid date format")
+    expect(() => new Task(params.title, params.description, params.status, params.dueDate))
+      .toThrow(new BadRequestError("Invalid date format"))
   })
 
   test('Does not create a task with invalid status', () => {
@@ -51,6 +53,7 @@ describe('#constructor', () => {
       dueDate: "2025-01-30"
     }
 
-    expect(() => new Task(params.title, params.description, params.status, params.dueDate)).toThrow("Invalid task status")
+    expect(() => new Task(params.title, params.description, params.status, params.dueDate))
+    .toThrow(new BadRequestError("Invalid task status"))
   })
 })

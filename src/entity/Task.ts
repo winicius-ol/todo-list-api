@@ -1,3 +1,5 @@
+import BadRequestError from "@/error/BadRequestError";
+
 export enum TaskStatus {
   Pending = "Pending",
   Ongoing = "Ongoing",
@@ -38,7 +40,7 @@ export default class Task {
   private handleDueDate(dueDate?: string): Date | undefined {
     if (!dueDate) return;
     if (this.isInvalidDate(dueDate)) {
-      throw new Error("Invalid date format");
+      throw new BadRequestError("Invalid date format");
     }
 
     const [year, month, day] = dueDate.split("-");
@@ -54,7 +56,7 @@ export default class Task {
   private handleStatus(status: TaskStatus): TaskStatus {
     const validStatuses = Object.values(TaskStatus);
     if (!validStatuses.includes(status)) {
-      throw new Error("Invalid task status");
+      throw new BadRequestError("Invalid task status");
     }
     return status;
   }
