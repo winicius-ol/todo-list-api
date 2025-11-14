@@ -1,6 +1,6 @@
 import { TaskStatus } from "@/entity/Task";
 
-export default interface CreateTaskDTO {
+export default interface TaskCreatorDTO {
   title: string;
   description: string;
   status?: TaskStatus;
