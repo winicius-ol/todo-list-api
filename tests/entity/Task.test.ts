@@ -29,7 +29,7 @@ describe('#constructor', () => {
     expect(task.getTitle()).toEqual(params.title)
     expect(task.getDescription()).toEqual(params.description)
     expect(task.getStatus()).toEqual(params.status)    
-    expect(task.getDueDate()).toEqual(new Date(2025, 0, 30))
+    expect(task.getDueDate()).toEqual(params.dueDate)
   })
 
   test('Does not create a task with invalid date', () => {
@@ -41,5 +41,16 @@ describe('#constructor', () => {
     }
 
     expect(() => new Task(params.title, params.description, params.status, params.dueDate)).toThrow("Invalid date format")
+  })
+
+  test('Does not create a task with invalid status', () => {
+    const params = {
+      title: 'Test',
+      description: 'Test description',
+      status: "InvalidStatus" as TaskStatus,
+      dueDate: "2025-01-30"
+    }
+
+    expect(() => new Task(params.title, params.description, params.status, params.dueDate)).toThrow("Invalid task status")
   })
 })

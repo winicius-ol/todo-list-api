@@ -15,7 +15,7 @@ export default class Task {
     dueDate?: string
   ) {
     this.dueDate = this.handleDueDate(dueDate);
-    this.status = status;
+    this.status = this.handleStatus(status);
   }
 
   getTitle() {
@@ -49,5 +49,13 @@ export default class Task {
     if (!date) return false;
 
     return !date.match(/^\d{4}-\d{2}-\d{2}$/);
+  }
+
+  private handleStatus(status: TaskStatus): TaskStatus {
+    const validStatuses = Object.values(TaskStatus);
+    if (!validStatuses.includes(status)) {
+      throw new Error("Invalid task status");
+    }
+    return status;
   }
 }
