@@ -1,5 +1,5 @@
 # TODO
-- [ ] Rotas de endpoint para a comunicação da API
+- [x] Rotas de endpoint para a comunicação da API
 - [ ] Criação das entidades necessárias para uma TODO list
   - [ ] Entidade `Task` (Tarefa)
     - [ ] Conteúdo de uma tarefa: título, descrição, status (concluída ou não concluída), data de prazo e timestamps (data de criação e data de atualização)
