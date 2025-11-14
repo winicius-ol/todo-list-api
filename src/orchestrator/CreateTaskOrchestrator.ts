@@ -8,7 +8,7 @@ export default class CreateTaskOrchestrator {
 
   async execute() {
     const task = new TaskCreator(this.taskParams).execute()
-    const taskId = await new TaskRepository().create(task, this.dbAccessor)
+    const taskId = await TaskRepository.create(task, this.dbAccessor)
 
     return taskId
   }
