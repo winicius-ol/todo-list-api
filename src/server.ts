@@ -3,6 +3,7 @@ import { Router, Request, Response } from 'express';
 import CreateTaskController from '@/controller/CreateTaskController';
 import GetTasksController from '@/controller/GetTasksController';
 import EditTaskController from '@/controller/EditTaskController';
+import DeleteTaskController from '@/controller/DeleteTaskController';
 
 const app = express();
 const route = Router()
@@ -12,6 +13,7 @@ app.use(express.json())
 route.get('/tasks', (req: Request, res: Response) => new GetTasksController().execute(req, res))
 route.post('/task', (req: Request, res: Response) => new CreateTaskController().execute(req, res))
 route.put('/task/:taskId', (req: Request, res: Response) => new EditTaskController().execute(req, res))
+route.delete('/task/:taskId', (req: Request, res: Response) => new DeleteTaskController().execute(req, res))
 
 route.get('/', (req: Request, res: Response) => {
   res.json({ message: 'hello world with Typescript Hehehe' })
