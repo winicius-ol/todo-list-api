@@ -5,6 +5,7 @@ import GetTasksController from '@/controller/GetTasksController';
 import EditTaskController from '@/controller/EditTaskController';
 import DeleteTaskController from '@/controller/DeleteTaskController';
 import UpsertDueDateDependencyController from '@/controller/UpsertDueDateDependencyController';
+import GetDueDateDependenciesController from '@/controller/GetDueDateDependenciesController';
 
 const app = express();
 const route = Router()
@@ -16,6 +17,7 @@ route.post('/task', (req: Request, res: Response) => new CreateTaskController().
 route.put('/task/:taskId', (req: Request, res: Response) => new EditTaskController().execute(req, res))
 route.delete('/task/:taskId', (req: Request, res: Response) => new DeleteTaskController().execute(req, res))
 
+route.get('/due-date-dependencies', (req: Request, res: Response) => new GetDueDateDependenciesController().execute(req, res))
 route.put('/due-date-dependency', (req: Request, res: Response) => new UpsertDueDateDependencyController().execute(req, res))
 
 route.get('/', (req: Request, res: Response) => {

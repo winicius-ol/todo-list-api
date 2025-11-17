@@ -13,4 +13,9 @@ export default class DueDateDependencyRepository {
 
     return dueDateDependency;
   }
+
+  static async getAll(dbAccessor: DBAccessor): Promise<DueDateDependency[] | undefined> {
+    const result = await dbAccessor.executeQuery('SELECT * FROM due_date_dependencies');
+    return (result.rows || []).map((row) => new DueDateDependency(row.parent_id, row.child_id, row.delay));
+  }
 }
