@@ -13,8 +13,8 @@ describe('#execute', () => {
     const taskCreator = new TaskCreator(params)
     const task = taskCreator.execute()
 
-    expect(task.title).toBe(params.title)
-    expect(task.description).toBe(params.description)
-    expect(task.status).toBe(TaskStatus.Pending)
+    expect(task.getTitle()).toBe(params.title)
+    expect(task.getDescription()).toBe(params.description)
+    expect(task.getStatus()).toBe(TaskStatus.Pending)
   })
 })
