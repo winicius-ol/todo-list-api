@@ -2,7 +2,7 @@ import Task, { TaskStatus } from "@/entity/Task";
 import { DBAccessor } from "../db/DBAccessor";
 
 
-export class TaskRepository {
+export default class TaskRepository {
   static async create(task: Task, dbAccessor: DBAccessor): Promise<number | undefined> {
     const insertResult = await dbAccessor.executeQuery(
       'INSERT INTO tasks (title, description, status, due_date) VALUES (?, ?, ?, ?)',

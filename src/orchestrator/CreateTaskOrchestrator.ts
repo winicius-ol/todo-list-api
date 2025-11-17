@@ -1,7 +1,7 @@
 import TaskCreator from "@/service/TaskCreator";
 import TaskCreatorDTO from "@/dto/TaskCreatorDTO";
 import { DBAccessor } from "@/db/DBAccessor";
-import { TaskRepository } from "@/repository/TaskRepository";
+import TaskRepository from "@/repository/TaskRepository";
 
 export default class CreateTaskOrchestrator {
   constructor(private taskParams: TaskCreatorDTO, private dbAccessor: DBAccessor) {}
