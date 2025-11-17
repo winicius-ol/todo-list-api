@@ -1,3 +1,4 @@
+import TaskPropertiesDTO from "@/dto/TaskPropertiesDTO";
 import BadRequestError from "@/error/BadRequestError";
 
 export enum TaskStatus {
@@ -40,6 +41,13 @@ export default class Task {
   getDueDate() {
     if (!this.dueDate) return;
     return this.dueDate.toISOString().split("T")[0];
+  }
+
+  updateProperties(properties: TaskPropertiesDTO) {
+    this.title = properties.title || this.title;
+    this.description = properties.description || this.description;
+    this.status = properties.status || this.status;
+    this.dueDate = this.handleDueDate(properties.dueDate);
   }
 
   private handleDueDate(dueDate?: string): Date | undefined {
