@@ -1,14 +1,21 @@
 import BadRequestError from "@/error/BadRequestError";
 
 export default class DueDateDependency {
+  private parentId: number
+  private childId: number
   private delay: number
 
   constructor(
-    private parentId: number,
-    private childId: number,
+    parentId: number,
+    childId: number,
     delay: number
   ) {
-    this.delay = this.handleDelay(delay)
+    this.validateRefIds(parentId, childId)
+    this.validateDelay(delay)
+
+    this.parentId = parentId
+    this.childId = childId
+    this.delay = delay
   }
 
   getParentId(): number {
@@ -23,11 +30,15 @@ export default class DueDateDependency {
     return this.delay
   }
 
-  private handleDelay(delay: number): number {
+  private validateRefIds(parentId: number, childId: number): void {
+    if (parentId === childId) {
+      throw new BadRequestError("Parent and child cannot be the same")
+    }
+  }
+
+  private validateDelay(delay: number): void {
     if (delay < 0) {
       throw new BadRequestError("Invalid delay")
     }
-
-    return delay
   }
 }
