@@ -1,6 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 import Task, { TaskStatus } from "@/entity/Task";
 import BadRequestError from "@/error/BadRequestError";
+import TaskPropertiesDTO from "@/dto/TaskPropertiesDTO";
 
 describe('#constructor', () => {
   test('Creates a task with the provided properties and default status', () => {
@@ -55,5 +56,24 @@ describe('#constructor', () => {
 
     expect(() => new Task(params.title, params.description, params.status, params.dueDate))
     .toThrow(new BadRequestError("Invalid task status"))
+  })
+})
+
+describe('#updateProperties', () => {
+  test('Updates the task properties', () => {
+    const params = {
+      title: 'Test',
+      description: 'Test description',
+      dueDate: "2025-01-30"
+    } as TaskPropertiesDTO
+
+    const task = new Task("original title", "original description")
+
+    task.updateProperties(params)
+
+    expect(task.getTitle()).toEqual(params.title)
+    expect(task.getDescription()).toEqual(params.description)
+    expect(task.getStatus()).toEqual(TaskStatus.Pending)
+    expect(task.getDueDate()).toEqual(params.dueDate)
   })
 })
