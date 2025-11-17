@@ -18,4 +18,23 @@ export default class DueDateDependencyRepository {
     const result = await dbAccessor.executeQuery('SELECT * FROM due_date_dependencies');
     return (result.rows || []).map((row) => new DueDateDependency(row.parent_id, row.child_id, row.delay));
   }
+
+  static async findByIds(parentId: number, childId: number, dbAccessor: DBAccessor): Promise<DueDateDependency | undefined> {
+    const result = await dbAccessor.executeQuery(
+      'SELECT * FROM due_date_dependencies WHERE parent_id = ? AND child_id = ?',
+      [parentId, childId]
+    );
+
+    if (!result.rows?.[0]) return undefined
+    const foundRow = result.rows[0]
+
+    return new DueDateDependency(foundRow.parent_id, foundRow.child_id, foundRow.delay)
+  }
+
+  static async delete(parentId: number, childId: number, dbAccessor: DBAccessor): Promise<void> {
+    await dbAccessor.executeQuery(
+      'DELETE FROM due_date_dependencies WHERE parent_id = ? AND child_id = ?',
+      [parentId, childId]
+    );
+  }
 }
