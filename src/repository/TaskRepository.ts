@@ -1,5 +1,5 @@
-import Task, { TaskStatus } from "@/entity/Task";
-import { DBAccessor } from "../db/DBAccessor";
+import Task from "@/entity/Task";
+import { DBAccessor } from "@/db/DBAccessor";
 
 
 export default class TaskRepository {

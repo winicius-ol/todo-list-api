@@ -4,6 +4,7 @@ import CreateTaskController from '@/controller/CreateTaskController';
 import GetTasksController from '@/controller/GetTasksController';
 import EditTaskController from '@/controller/EditTaskController';
 import DeleteTaskController from '@/controller/DeleteTaskController';
+import UpsertDueDateDependencyController from '@/controller/UpsertDueDateDependencyController';
 
 const app = express();
 const route = Router()
@@ -14,6 +15,8 @@ route.get('/tasks', (req: Request, res: Response) => new GetTasksController().ex
 route.post('/task', (req: Request, res: Response) => new CreateTaskController().execute(req, res))
 route.put('/task/:taskId', (req: Request, res: Response) => new EditTaskController().execute(req, res))
 route.delete('/task/:taskId', (req: Request, res: Response) => new DeleteTaskController().execute(req, res))
+
+route.put('/due-date-dependency', (req: Request, res: Response) => new UpsertDueDateDependencyController().execute(req, res))
 
 route.get('/', (req: Request, res: Response) => {
   res.json({ message: 'hello world with Typescript Hehehe' })
