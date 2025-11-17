@@ -32,4 +32,11 @@ export default class TaskRepository {
       [task.getTitle(), task.getDescription(), task.getStatus(), task.getDueDate(), task.getId()]
     );
   }
+
+  static async delete(id: number, dbAccessor: DBAccessor): Promise<void> {
+    await dbAccessor.executeQuery(
+      'DELETE FROM tasks WHERE id = ?',
+      [id]
+    );
+  }
 }
